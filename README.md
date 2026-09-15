@@ -99,5 +99,5 @@ def test_generate_csv(self):
 以下のプロンプトと共に、Claude Codeに投げてみましょう！
 
 ```text
-/solid-design @requirements.md に従って、要件を満たすPythonコードを2nd_tryディレクトリの中に実装してください。
+@requirements.md に従って、要件を満たすPythonコードを2nd_tryディレクトリの中に実装してください。
 ```

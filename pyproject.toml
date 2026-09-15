@@ -15,6 +15,6 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["1st_try"]
+testpaths = ["1st_try", "2nd_try"]
 # `uv run pytest` だけで、ターミナル表示とHTMLレポート生成の両方が走る
 addopts = "-q --html=reports/report.html --self-contained-html"
