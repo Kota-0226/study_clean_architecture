@@ -1,1 +1,114 @@
 # study_clean_architecture
+
+## はじめに
+
+uvのインストールを行なってください。
+
+```
+# uv がインストールされていない場合は、インストールする
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+
+uv sync
+```
+
+## Part1 SOLID原則を学ぼう
+
+### 実装要件
+
+システムが満たすべき共通の要件は以下の通りです。
+
+1. 売上データの保持と集計
+
+   - 与えられた売上データ（商品名と金額のリスト）を保持できること。
+   - すべての売上の合計金額（Total Sales）を正しく計算できること。
+
+2. CSV出力
+
+   - 保持しているデータから、正しいフォーマットのCSV文字列（ヘッダー付き）を生成できること。
+   - **合計金額は含めない。** ヘッダー行と明細行だけを出力すること。
+
+   ```Plaintext
+   item,amount
+   Apple,100
+   Banana,200
+   ```
+
+3. PDF出力
+
+   - 保持しているデータから、PDF用のレイアウト文字列を生成できること。
+   - **合計金額を含めること。** レイアウトの細かい見た目までは問わない。（合計金額を含んでいれば、文字列の形は違ってよい）
+
+   ```Plaintext
+   [PDF Data] Total Sales: 300
+   ```
+
+
+### ディレクトリ構成
+```Plaintext
+1st_try/
+├── before.py         # リファクタリング前のコード
+├── after.py          # リファクタリング後のコード
+├── test_report.py    # Before / After 両方のテストコード
+└── conftest.py       # テスト結果を日本語で表示するための設定
+```
+
+### 動作確認
+
+以下の通り実行して下さい。
+
+```bash
+uv run pytest
+```
+
+実行すると、どのテストが何を検証したのかが日本語で表示されます。
+
+```Plaintext
+==================================== テスト結果 =====================================
+
+【Before】1つのクラスに全部の処理が入っている版
+  ✅ CSV出力が仕様どおりの文字列になること
+  ✅ PDF出力に合計金額が含まれること
+
+【After】責務ごとにクラスを分けた版（SRP・OCP適用後）
+  ✅ 売上データの合計金額を正しく計算できること
+  ✅ CSV出力が仕様どおりの文字列になること
+  ✅ PDF出力に合計金額が含まれること
+
+5件すべて成功しました
+```
+
+同時に `reports/report.html` が生成されるので、ブラウザで開くと同じ内容を表形式で確認できます。
+
+```bash
+open reports/report.html
+```
+
+なお、Before / After それぞれの動きを直接見たい場合は、以下で実行できます。
+
+```bash
+uv run 1st_try/before.py
+uv run 1st_try/after.py
+```
+
+### テストを追加するときは
+
+テスト関数の docstring の1行目に、日本語で「何を確認するテストか」を1行書いてください。
+その1行がそのままターミナルとHTMLレポートの説明欄に表示されます。
+
+```python
+def test_generate_csv(self):
+  """CSV出力が仕様どおりの文字列になること"""   # ← この行が結果一覧に表示される
+  ...
+```
+
+## Part2 Skillsを使ってみる
+以下のプロンプトと共に、Claude Codeに投げてみましょう！
+
+```text
+@requirements.md に従って、要件を満たすPythonコードを2nd_tryディレクトリの中に実装してください。
+```
