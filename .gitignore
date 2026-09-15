@@ -9,10 +9,10 @@ __pycache__/
 .venv/
 venv/
 
+# Test reports
+reports/
+
 # Editor / OS
 .DS_Store
 .idea/
 .vscode/
-
-# Claude Code local config
-.claude/
