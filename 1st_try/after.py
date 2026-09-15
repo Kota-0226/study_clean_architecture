@@ -40,16 +40,6 @@ class PdfReportExporter(ReportExporter):
     # PDF生成のロジック...
     return f"--- PDF Document ---\nTotal: {total}"
 
-# 5. 具象クラス：JSON出力
-class JsonReportExporter(ReportExporter):
-
-  def export(self, report: SalesReport) -> str:
-    import json
-    return json.dumps({
-      "total_sales": report.get_total_sales(),
-      "data": report.get_data()
-    })
-
 if __name__ == "__main__":
     # データの準備
     data = [
@@ -72,7 +62,4 @@ if __name__ == "__main__":
     print(pdf_result)
 
     # もし、json出力を追加したい場合は...? -> ReportExporter を継承した JsonReportExporter クラスを追加するだけでOK
-    print("=== CSV Export ===")
-    json_exporter : ReportExporter = JsonReportExporter()
-    json_result = json_exporter.export(report)
-    print(json_result)
+    print("=== JSON Export ===")

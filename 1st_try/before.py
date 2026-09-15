@@ -20,12 +20,6 @@ class SalesReport:
       print("Drawing PDF layout...")
       return f"[PDF Data] {summary}"
 
-    elif format_type == "json":
-      import json
-      return json.dumps({
-        "total_sales": total_sales,
-        "data": self.data
-      })
 
     else:
       raise ValueError(f"Unsupported format: {format_type}")
@@ -49,5 +43,3 @@ if __name__ == "__main__":
     print(pdf_result)
 
     # もし、json出力を追加したい場合は...? -> SalesReport クラスに generate("json") というメソッドを追加する必要がある。generate()関数を拡張する必要があり、必要のない影響が増えてしまう
-    json_result = report.generate("json")
-    print(json_result)
