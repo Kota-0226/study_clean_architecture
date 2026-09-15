@@ -45,12 +45,12 @@ class TestSalesReportAfter(unittest.TestCase):
     report = AfterSalesReport(data)
 
     self.assertEqual(report.get_total_sales(), 300)
-    self.assertEqual(report.get_rows(), data)
+    self.assertEqual(report.get_data(), data)
 
   def test_csv_report_exporter(self):
     """CSV出力が仕様どおりの文字列になること"""
     mock_report = MagicMock()
-    mock_report.get_rows.return_value = [
+    mock_report.get_data.return_value = [
         {"item": "Apple", "amount": 100},
         {"item": "Orange", "amount": 150},
     ]

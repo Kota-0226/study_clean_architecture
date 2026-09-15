@@ -10,7 +10,7 @@ class SalesReport:
   def get_total_sales(self) -> int:
     return sum(row["amount"] for row in self.data)
 
-  def get_rows(self) -> list[dict]:
+  def get_data(self) -> list[dict]:
     return self.data
 
 
@@ -27,7 +27,7 @@ class CsvReportExporter(ReportExporter):
 
   def export(self, report: SalesReport) -> str:
     lines = ["item,amount"]
-    for row in report.get_rows():
+    for row in report.get_data():
       lines.append(f"{row['item']},{row['amount']}")
     return "\n".join(lines)
 
@@ -47,7 +47,7 @@ class JsonReportExporter(ReportExporter):
     import json
     return json.dumps({
       "total_sales": report.get_total_sales(),
-      "data": report.get_rows()
+      "data": report.get_data()
     })
 
 if __name__ == "__main__":
