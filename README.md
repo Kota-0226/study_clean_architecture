@@ -4,6 +4,17 @@
 
 uvのインストールを行なってください。
 
+```
+# uv がインストールされていない場合は、インストールする
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+
+uv sync
+```
 
 ## Part1 SOLID原則を学ぼう
 
@@ -80,8 +91,8 @@ open reports/report.html
 なお、Before / After それぞれの動きを直接見たい場合は、以下で実行できます。
 
 ```bash
-uv run python 1st_try/before.py
-uv run python 1st_try/after.py
+uv run 1st_try/before.py
+uv run 1st_try/after.py
 ```
 
 ### テストを追加するときは
