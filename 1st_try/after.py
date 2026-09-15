@@ -60,16 +60,19 @@ if __name__ == "__main__":
     report = SalesReport(data)
     
     # CSV出力
-    csv_exporter = CsvReportExporter()
+    print("=== CSV Export ===")
+    csv_exporter : ReportExporter = CsvReportExporter()
     csv_result = csv_exporter.export(report)
     print(csv_result)
     
     # PDF出力
-    pdf_exporter = PdfReportExporter()
+    print("=== CSV Export ===")
+    pdf_exporter : ReportExporter = PdfReportExporter()
     pdf_result = pdf_exporter.export(report)
     print(pdf_result)
 
     # もし、json出力を追加したい場合は...? -> ReportExporter を継承した JsonReportExporter クラスを追加するだけでOK
-    json_exporter = JsonReportExporter()
+    print("=== CSV Export ===")
+    json_exporter : ReportExporter = JsonReportExporter()
     json_result = json_exporter.export(report)
     print(json_result)
